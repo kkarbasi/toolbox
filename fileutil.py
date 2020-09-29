@@ -1,4 +1,4 @@
-def find_recursive(base_dir, extention = 'mff', ftype = 'd', max_depth = None):
+def find_recursive(base_dir, extention='mff', ftype='d', max_depth=None, verbose=False):
     """
     Finds files or directories with the specified extention
     """
@@ -22,9 +22,10 @@ def find_recursive(base_dir, extention = 'mff', ftype = 'd', max_depth = None):
         try:
             for root, dirnames, filenames in walker(base_dir, max_depth):
                 for d_name in dirnames:
-                    if d_name.endswith(extention) and d_name.startswith('SHWK'):
+                    if d_name.endswith(extention): #and d_name.startswith('SHWK'):
                         list_of_files.append(os.path.join(root, d_name))
-                        print('Found-->{}'.format(list_of_files[-1]))
+                        if verbose:
+                            print('Found-->{}'.format(list_of_files[-1]))
         except Exception as e:
             print(str(e))
             pass
@@ -34,7 +35,8 @@ def find_recursive(base_dir, extention = 'mff', ftype = 'd', max_depth = None):
                 for f_name in filenames:
                     if f_name.endswith(extention):
                         list_of_files.append(os.path.join(root, f_name))
-                        print('Found-- {}'.format(list_of_files[-1]))
+                        if verbose:
+                            print('Found-- {}'.format(list_of_files[-1]))
         except Exception as e:
             print(str(e))
             pass
